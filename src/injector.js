@@ -14,7 +14,7 @@ export default class Injector {
     }
     this.deps = depsMap;
 
-    return 
+    // return 
   }
   add(name, value) {
     let depName = name;
@@ -25,9 +25,8 @@ export default class Injector {
         depName = value.name.toLowerCase();
       }
     }
-    if(!depName) {
-      assertOk(depName, `'name' argument or property must provided.`);
-    } 
+    
+    assertOk(depName, `'name' argument or property must provided.`);
     
     // older will be replaced
     this.deps.set(depName, value);
@@ -36,9 +35,7 @@ export default class Injector {
     const argType = getArgType(names);
     const depsName = argType === 'string'? [names]: argType === 'array'? names: [];
 
-    const resolved = depsName.map(name => {
-      return this.deps.get(name);
-    });
+    const resolved = depsName.map(name => this.deps.get(name));
     
     if(getArgType(fn) === 'function') {
       fn.apply(this, resolved);

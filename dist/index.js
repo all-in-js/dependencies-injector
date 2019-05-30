@@ -1,5 +1,11 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Injectable = Injectable;
+exports.Inject = Inject;
+
 var _injector = _interopRequireDefault(require("./injector"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26,6 +32,16 @@ function Injectable(target) {
 
 function Inject(names) {
   return function (target) {
-    const resolved = inject.resolve(names); // do sth
+    const resolved = inject.resolve(names);
+    return extend(target, resolved);
+  };
+}
+
+function extend(clas, resolved) {
+  return class extends clas {
+    constructor(...args) {
+      super(...resolved, ...args);
+    }
+
   };
 }

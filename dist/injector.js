@@ -20,8 +20,7 @@ class Injector {
       depsMap = new Map();
     }
 
-    this.deps = depsMap;
-    return;
+    this.deps = depsMap; // return 
   }
 
   add(name, value) {
@@ -35,10 +34,7 @@ class Injector {
       }
     }
 
-    if (!depName) {
-      (0, _assert.ok)(depName, `'name' argument or property must provided.`);
-    } // older will be replaced
-
+    (0, _assert.ok)(depName, `'name' argument or property must provided.`); // older will be replaced
 
     this.deps.set(depName, value);
   }
@@ -46,9 +42,7 @@ class Injector {
   resolve(names, fn) {
     const argType = getArgType(names);
     const depsName = argType === 'string' ? [names] : argType === 'array' ? names : [];
-    const resolved = depsName.map(name => {
-      return this.deps.get(name);
-    });
+    const resolved = depsName.map(name => this.deps.get(name));
 
     if (getArgType(fn) === 'function') {
       fn.apply(this, resolved);
