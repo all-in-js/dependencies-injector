@@ -35,7 +35,7 @@ export default class Injector {
     const argType = getArgType(names);
     const depsName = argType === 'string'? [names]: argType === 'array'? names: [];
 
-    const resolved = depsName.map(name => this.deps.get(name));
+    const resolved = depsName.map(name => this.deps.get(name.toLowerCase()));
     
     if(getArgType(fn) === 'function') {
       fn.apply(this, resolved);

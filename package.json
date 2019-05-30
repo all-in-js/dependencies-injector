@@ -1,5 +1,5 @@
 {
-  "name": "@famanoder/dependencies-injector",
+  "name": "@eryue/injector",
   "version": "1.0.0",
   "description": "a Javascript & Nodejs dependencies injector",
   "main": "dist",
@@ -15,7 +15,6 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5"
   },
-  "dependencies": {
-    "lodash": "^4.17.11"
-  }
+  "dependencies": {},
+  "keywords": ["js", "nodejs", "di", "inject", "dependencies injector"]
 }

@@ -5,25 +5,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Injectable = Injectable;
 exports.Inject = Inject;
+exports.default = void 0;
 
 var _injector = _interopRequireDefault(require("./injector"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// export default function Injectable () {}
-// @Inject('a', 'b')
-// export class UserService {
-//     constructor(a, b) {
-//         this.id = id;
-//     }
-//     getUserInfo(id) {
-//         console.log('id');
-//     }
-// }
-// deps[init obj, add, remove], target => function(...deps) => constructor(...deps)
-// Injector.resolve(['a', 'b'], function || constructor);
-// const {a, b} = Injector.resolve('a', 'b');
-// const [a, b] = Injector.resolve('a', 'b');
 const inject = new _injector.default();
 
 function Injectable(target) {
@@ -45,3 +32,6 @@ function extend(clas, resolved) {
 
   };
 }
+
+var _default = _injector.default;
+exports.default = _default;

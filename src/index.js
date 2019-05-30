@@ -20,3 +20,5 @@ function extend(clas, resolved) {
     }
   }
 }
+
+export default Injector;
