@@ -1427,7 +1427,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
 
 lodash@^4.17.11:
   version "4.17.11"
-  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+  resolved "http://r.cnpmjs.org/lodash/download/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha1-s56mIp72B+zYniyN8SU2iRysm40=
 
 loose-envify@^1.0.0:
