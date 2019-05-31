@@ -15,6 +15,14 @@
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5"
   },
-  "dependencies": {},
-  "keywords": ["js", "nodejs", "di", "inject", "dependencies injector"]
+  "dependencies": {
+    "lodash.flatten": "^4.4.0"
+  },
+  "keywords": [
+    "js",
+    "nodejs",
+    "di",
+    "inject",
+    "dependencies injector"
+  ]
 }

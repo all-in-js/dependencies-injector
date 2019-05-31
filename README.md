@@ -5,7 +5,7 @@
 * Injector class
 
 ```js
-import Injector from '@famanoder/injector';
+import Injector from '@eryue/injector';
 
 const initDeps = {
   key: function key() {}
@@ -22,7 +22,7 @@ const [testService] = inject.resolve('TestService');
 * Decorator
 
 ```js
-import {Injectable, Inject} from '@famanoder/injector';
+import {Injectable, Inject} from '@eryue/injector';
 
 @Injectable
 class TestService {}
