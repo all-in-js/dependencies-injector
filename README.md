@@ -19,9 +19,11 @@ inject.resolve(['TestService', 'key'], function(testService, key) {});
 const [testService] = inject.resolve('TestService');
 ```
 
-> this `inject.resolve` support various types, eg:
-> \n`inject.resolve(string[array<string>[function]])` 
-> if argument just is a function, it's arguments would be parsed to be an array to be resolved.
+```
+// this `inject.resolve` support various types, eg:
+// `inject.resolve(string[array<string>[function]])` 
+// if argument just is a function, it's arguments would be parsed to be an array to be resolved.
+```
 
 * Decorator
 
