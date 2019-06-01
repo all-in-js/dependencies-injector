@@ -37,7 +37,7 @@ class Injector {
     _utils.assert.ok(depName, `'name' argument or property must provided.`); // older will be replaced
 
 
-    this.deps.set(depName.toLowerCase(), value);
+    this.deps.set(depName, value);
   }
 
   resolve() {
@@ -45,7 +45,7 @@ class Injector {
       args,
       fn
     } = parseArgs(Array.from(arguments));
-    const resolved = args.map(name => this.deps.get(name.toLowerCase()));
+    const resolved = args.map(name => this.deps.get(name));
 
     if (fn) {
       fn.apply(this, resolved);
