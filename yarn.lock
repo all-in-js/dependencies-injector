@@ -663,6 +663,13 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@eryue/utils@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@eryue/utils/-/utils-1.0.0.tgz#10d1cfea08dcdb2d0a8b9de76d556fea7a32efde"
+  integrity sha512-itED4/XNhLnujfVqeaEMsFAMBveXuht0GgdZH1uRcYFWaIOeGDcyKJYxGREqnwQRHfvvbP5eDe2w0QHr/MHhmg==
+  dependencies:
+    lodash.flatten "^4.4.0"
+
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.npm.taobao.org/abbrev/download/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
@@ -1427,7 +1434,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
 
 lodash.flatten@^4.4.0:
   version "4.4.0"
-  resolved "https://registry.npm.taobao.org/lodash.flatten/download/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
+  resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
   integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
 
 lodash@^4.17.11:

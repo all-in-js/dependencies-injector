@@ -1,13 +1,15 @@
 {
   "name": "@eryue/injector",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "description": "a Javascript & Nodejs dependencies injector",
   "main": "dist",
   "repository": "https://github.com/famanoder/dependencies-injector.git",
   "author": "famanoder",
   "license": "MIT",
   "scripts": {
-    "build": "./node_modules/.bin/babel src --out-dir dist -w --delete-dir-on-start"
+    "compile": "./node_modules/.bin/babel src --out-dir dist --delete-dir-on-start",
+    "build": "yarn compile -w",
+    "prepublish": "yarn compile"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -16,7 +18,7 @@
     "@babel/preset-env": "^7.4.5"
   },
   "dependencies": {
-    "lodash.flatten": "^4.4.0"
+    "@eryue/utils": "^1.0.0"
   },
   "keywords": [
     "js",

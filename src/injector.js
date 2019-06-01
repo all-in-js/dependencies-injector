@@ -1,5 +1,4 @@
-import {ok as assertOk} from 'assert';
-import flatten from 'lodash.flatten';
+import {getArgType, objToMap, assert, _} from '@eryue/utils';
 
 export default class Injector {
   constructor(initDeps) {
@@ -21,14 +20,14 @@ export default class Injector {
       if(getArgType(value) === 'string') {
         depName = value;
       }else if(value.name) {
-        depName = value.name.toLowerCase();
+        depName = value.name;
       }
     }
     
-    assertOk(depName, `'name' argument or property must provided.`);
+    assert.ok(depName, `'name' argument or property must provided.`);
     
     // older will be replaced
-    this.deps.set(depName, value);
+    this.deps.set(depName.toLowerCase(), value);
   }
   resolve() {
     const {args, fn} = parseArgs(Array.from(arguments));
@@ -67,7 +66,7 @@ function parseArgs(args) {
         args = extractArgs(fn);
       }
     }
-    args = flatten(args);
+    args = _.flatten(args);
   }
 
   return {args, fn};
@@ -85,18 +84,6 @@ function extractArgs(fn = '') {
     args = args[1].split(',').map(arg => arg.toString().trim());
   }
   return args; 
-}
-
-function getArgType(agr) {
-  return Object.prototype.toString.call(agr).split(/\s/)[1].slice(0, -1).toLowerCase();
-}
-
-function objToMap(obj) {
-  const map = new Map();
-  for (const k of Object.keys(obj)) {
-    map.set(k, obj[k]);
-  }
-  return map;
 }
 
 // const a = parseArgs([function(a,b,v) {}]);

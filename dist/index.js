@@ -17,9 +17,9 @@ function Injectable(target) {
   inject.add(target.constructor.name, target);
 }
 
-function Inject(names) {
+function Inject() {
+  const resolved = inject.resolve.apply(inject, arguments);
   return function (target) {
-    const resolved = inject.resolve(names);
     return extend(target, resolved);
   };
 }

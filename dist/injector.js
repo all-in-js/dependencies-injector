@@ -5,19 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _assert = require("assert");
-
-var _lodash = _interopRequireDefault(require("lodash.flatten"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _utils = require("@eryue/utils");
 
 class Injector {
   constructor(initDeps) {
     let depsMap;
-    const argType = getArgType(initDeps);
+    const argType = (0, _utils.getArgType)(initDeps);
 
     if (argType === 'object') {
-      depsMap = objToMap(initDeps);
+      depsMap = (0, _utils.objToMap)(initDeps);
     } else if (argType === 'map') {
       depsMap = initDeps;
     } else {
@@ -31,16 +27,17 @@ class Injector {
     let depName = name;
 
     if (!name) {
-      if (getArgType(value) === 'string') {
+      if ((0, _utils.getArgType)(value) === 'string') {
         depName = value;
       } else if (value.name) {
-        depName = value.name.toLowerCase();
+        depName = value.name;
       }
     }
 
-    (0, _assert.ok)(depName, `'name' argument or property must provided.`); // older will be replaced
+    _utils.assert.ok(depName, `'name' argument or property must provided.`); // older will be replaced
 
-    this.deps.set(depName, value);
+
+    this.deps.set(depName.toLowerCase(), value);
   }
 
   resolve() {
@@ -75,7 +72,7 @@ function parseArgs(args) {
   if (args.length) {
     fn = args.pop();
 
-    if (getArgType(fn) !== 'function') {
+    if ((0, _utils.getArgType)(fn) !== 'function') {
       args.push(fn);
       fn = null;
     } else {
@@ -85,7 +82,7 @@ function parseArgs(args) {
       }
     }
 
-    args = (0, _lodash.default)(args);
+    args = _utils._.flatten(args);
   }
 
   return {
@@ -107,19 +104,5 @@ function extractArgs(fn = '') {
   }
 
   return args;
-}
-
-function getArgType(agr) {
-  return Object.prototype.toString.call(agr).split(/\s/)[1].slice(0, -1).toLowerCase();
-}
-
-function objToMap(obj) {
-  const map = new Map();
-
-  for (const k of Object.keys(obj)) {
-    map.set(k, obj[k]);
-  }
-
-  return map;
 } // const a = parseArgs([function(a,b,v) {}]);
 // console.log(a);
