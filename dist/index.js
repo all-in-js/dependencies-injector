@@ -33,5 +33,5 @@ function extend(clas, resolved) {
   };
 }
 
-var _default = _injector.default;
+var _default = inject;
 exports.default = _default;

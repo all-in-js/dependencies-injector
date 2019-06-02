@@ -21,4 +21,4 @@ function extend(clas, resolved) {
   }
 }
 
-export default Injector;
+export default inject;

@@ -5,9 +5,9 @@ export default class Injector {
     let depsMap;
     const argType = getArgType(initDeps);
 
-    if(argType === 'object') {
+    if(argType.isObject) {
       depsMap = objToMap(initDeps);
-    }else if(argType === 'map'){
+    }else if(argType.isMap){
       depsMap = initDeps;
     }else{
       depsMap = new Map();
@@ -17,7 +17,7 @@ export default class Injector {
   add(name, value) {
     let depName = name;
     if(!name) {
-      if(getArgType(value) === 'string') {
+      if(getArgType(value).isString) {
         depName = value;
       }else if(value.name) {
         depName = value.name;
@@ -57,7 +57,7 @@ function parseArgs(args) {
   let fn = null;
   if(args.length) {
     fn = args.pop();
-    if(getArgType(fn) !== 'function') {
+    if(!getArgType(fn).isFunction) {
       args.push(fn);
       fn = null;
     }else{

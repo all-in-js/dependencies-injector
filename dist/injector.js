@@ -12,9 +12,9 @@ class Injector {
     let depsMap;
     const argType = (0, _utils.getArgType)(initDeps);
 
-    if (argType === 'object') {
+    if (argType.isObject) {
       depsMap = (0, _utils.objToMap)(initDeps);
-    } else if (argType === 'map') {
+    } else if (argType.isMap) {
       depsMap = initDeps;
     } else {
       depsMap = new Map();
@@ -27,7 +27,7 @@ class Injector {
     let depName = name;
 
     if (!name) {
-      if ((0, _utils.getArgType)(value) === 'string') {
+      if ((0, _utils.getArgType)(value).isString) {
         depName = value;
       } else if (value.name) {
         depName = value.name;
@@ -72,7 +72,7 @@ function parseArgs(args) {
   if (args.length) {
     fn = args.pop();
 
-    if ((0, _utils.getArgType)(fn) !== 'function') {
+    if (!(0, _utils.getArgType)(fn).isFunction) {
       args.push(fn);
       fn = null;
     } else {
