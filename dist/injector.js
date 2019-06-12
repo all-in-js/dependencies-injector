@@ -7,6 +7,9 @@ exports.default = void 0;
 
 var _utils = require("@eryue/utils");
 
+// 保护私有栈，防止通过实例调用直接篡改
+const dependenciesMap = new Map();
+
 class Injector {
   constructor(initDeps) {
     let depsMap;
@@ -20,7 +23,7 @@ class Injector {
       depsMap = new Map();
     }
 
-    this.deps = depsMap;
+    dependenciesMap.set(this, depsMap); // this.deps = depsMap;
   }
 
   add(name, value) {
@@ -37,7 +40,7 @@ class Injector {
     _utils.assert.ok(depName, `'name' argument or property must provided.`); // older will be replaced
 
 
-    this.deps.set(depName, value);
+    dependenciesMap.get(this).set(depName, value);
   }
 
   resolve() {
@@ -45,7 +48,7 @@ class Injector {
       args,
       fn
     } = parseArgs(Array.from(arguments));
-    const resolved = args.map(name => this.deps.get(name));
+    const resolved = args.map(name => dependenciesMap.get(this).get(name));
 
     if (fn) {
       fn.apply(this, resolved);
@@ -54,7 +57,10 @@ class Injector {
     return resolved;
   }
 
-} // resolve('a', 'b', 'c', function(x, y, z) {
+} // const i = new Injector({a:1,b:2});
+// i.add('c', 3);
+// i.resolve('a', 'b', 'c', function(x, y, z) {
+//   console.log(arguments)
 // });
 // resolve(['a', 'b', 'c'], function(x, y, z) {
 // });

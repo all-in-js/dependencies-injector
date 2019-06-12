@@ -1,5 +1,8 @@
 import {getArgType, objToMap, assert, _} from '@eryue/utils';
 
+// 保护私有栈，防止通过实例调用直接篡改
+const dependenciesMap = new Map();
+
 export default class Injector {
   constructor(initDeps) {
     let depsMap;
@@ -12,7 +15,8 @@ export default class Injector {
     }else{
       depsMap = new Map();
     }
-    this.deps = depsMap;
+    dependenciesMap.set(this, depsMap);
+    // this.deps = depsMap;
   }
   add(name, value) {
     let depName = name;
@@ -27,12 +31,12 @@ export default class Injector {
     assert.ok(depName, `'name' argument or property must provided.`);
     
     // older will be replaced
-    this.deps.set(depName, value);
+    dependenciesMap.get(this).set(depName, value);
   }
   resolve() {
     const {args, fn} = parseArgs(Array.from(arguments));
 
-    const resolved = args.map(name => this.deps.get(name));
+    const resolved = args.map(name => dependenciesMap.get(this).get(name));
     
     if(fn) {
       fn.apply(this, resolved);
@@ -41,8 +45,10 @@ export default class Injector {
   }
 }
 
-// resolve('a', 'b', 'c', function(x, y, z) {
-
+// const i = new Injector({a:1,b:2});
+// i.add('c', 3);
+// i.resolve('a', 'b', 'c', function(x, y, z) {
+//   console.log(arguments)
 // });
 // resolve(['a', 'b', 'c'], function(x, y, z) {
   
