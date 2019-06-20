@@ -84,7 +84,7 @@ function parseArgs(args) {
     } else {
       if (!args.length) {
         // just a callback
-        args = extractArgs(fn);
+        args = (0, _utils.getArgsFromFunc)(fn);
       }
     }
 
@@ -95,20 +95,5 @@ function parseArgs(args) {
     args,
     fn
   };
-}
-
-function extractArgs(fn = '') {
-  // reference from angular
-  const ARROW_ARG = /^([^\(]+?)=>/;
-  const FN_ARGS = /^[^\(]*\(\s*([^\)]*)\)/m;
-  const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
-  const fnText = fn.toString().replace(STRIP_COMMENTS, '');
-  let args = fnText.match(ARROW_ARG) || fnText.match(FN_ARGS) || [];
-
-  if (args.length) {
-    args = args[1].split(',').map(arg => arg.toString().trim());
-  }
-
-  return args;
 } // const a = parseArgs([function(a,b,v) {}]);
 // console.log(a);

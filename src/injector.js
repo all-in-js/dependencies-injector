@@ -1,4 +1,4 @@
-import {getArgType, objToMap, assert, _} from '@eryue/utils';
+import {getArgsFromFunc, getArgType, objToMap, assert, _} from '@eryue/utils';
 
 // 保护私有栈，防止通过实例调用直接篡改
 const dependenciesMap = new Map();
@@ -69,27 +69,13 @@ function parseArgs(args) {
     }else{
       if(!args.length) {
         // just a callback
-        args = extractArgs(fn);
+        args = getArgsFromFunc(fn);
       }
     }
     args = _.flatten(args);
   }
 
   return {args, fn};
-}
-
-
-function extractArgs(fn = '') { 
-  // reference from angular
-  const ARROW_ARG = /^([^\(]+?)=>/; 
-  const FN_ARGS = /^[^\(]*\(\s*([^\)]*)\)/m; 
-  const STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg; 
-  const fnText = fn.toString().replace(STRIP_COMMENTS, '');
-  let args = fnText.match(ARROW_ARG) || fnText.match(FN_ARGS) || []; 
-  if(args.length) {  
-    args = args[1].split(',').map(arg => arg.toString().trim());
-  }
-  return args; 
 }
 
 // const a = parseArgs([function(a,b,v) {}]);

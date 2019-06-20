@@ -1,6 +1,6 @@
 {
   "name": "@eryue/injector",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "a Javascript & Nodejs dependencies injector",
   "main": "dist",
   "repository": "https://github.com/famanoder/dependencies-injector.git",
@@ -18,7 +18,7 @@
     "@babel/preset-env": "^7.4.5"
   },
   "dependencies": {
-    "@eryue/utils": "^1.0.0"
+    "@eryue/utils": "^1.0.4"
   },
   "keywords": [
     "js",
