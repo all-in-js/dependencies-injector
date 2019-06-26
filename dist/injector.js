@@ -27,20 +27,24 @@ class Injector {
   }
 
   add(name, value) {
-    let depName = name;
+    const nameType = (0, _utils.getArgType)(name);
 
-    if (!name) {
-      if ((0, _utils.getArgType)(value).isString) {
-        depName = value;
-      } else if (value.name) {
-        depName = value.name;
+    if (!value && name) {
+      if (nameType.isString) {
+        value = name;
+      } else if (nameType.isFunction) {
+        value = name;
+        name = value.name;
+      } else {
+        value = name;
+        name = value.toString();
       }
     }
 
-    _utils.assert.ok(depName, `'name' argument or property must provided.`); // older will be replaced
+    _utils.assert.ok(name, `'name' argument or property must provided.`); // older will be replaced
 
 
-    dependenciesMap.get(this).set(depName, value);
+    dependenciesMap.get(this).set(name, value);
   }
 
   resolve() {
@@ -57,18 +61,7 @@ class Injector {
     return resolved;
   }
 
-} // const i = new Injector({a:1,b:2});
-// i.add('c', 3);
-// i.resolve('a', 'b', 'c', function(x, y, z) {
-//   console.log(arguments)
-// });
-// resolve(['a', 'b', 'c'], function(x, y, z) {
-// });
-// resolve(function(a, b, c) {
-// });
-// resolve('a', 'b', 'c');
-// resolve(['a', 'b', 'c']);
-
+}
 
 exports.default = Injector;
 

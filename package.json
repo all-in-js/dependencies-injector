@@ -7,9 +7,11 @@
   "author": "famanoder",
   "license": "MIT",
   "scripts": {
-    "compile": "./node_modules/.bin/babel src --out-dir dist --delete-dir-on-start",
+    "compile": "babel src --out-dir dist --delete-dir-on-start",
     "build": "yarn compile -w",
-    "prepublish": "yarn compile"
+    "prepublish": "yarn compile",
+    "test:dev": "jest --watch",
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -18,7 +20,8 @@
     "@babel/preset-env": "^7.4.5"
   },
   "dependencies": {
-    "@eryue/utils": "^1.0.4"
+    "@eryue/utils": "^1.0.4",
+    "jest": "^24.8.0"
   },
   "keywords": [
     "js",
@@ -26,5 +29,9 @@
     "di",
     "inject",
     "dependencies injector"
-  ]
+  ],
+  "jest": {
+    "roots": ["test"],
+    "notify": true
+  }
 }

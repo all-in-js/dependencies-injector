@@ -19,19 +19,24 @@ export default class Injector {
     // this.deps = depsMap;
   }
   add(name, value) {
-    let depName = name;
-    if(!name) {
-      if(getArgType(value).isString) {
-        depName = value;
-      }else if(value.name) {
-        depName = value.name;
+    const nameType = getArgType(name);
+
+    if(!value && name) {
+      if(nameType.isString) {
+        value = name;
+      }else if(nameType.isFunction) {
+        value = name;
+        name = value.name;
+      }else{
+        value = name;
+        name = value.toString();
       }
     }
     
-    assert.ok(depName, `'name' argument or property must provided.`);
+    assert.ok(name, `'name' argument or property must provided.`);
     
     // older will be replaced
-    dependenciesMap.get(this).set(depName, value);
+    dependenciesMap.get(this).set(name, value);
   }
   resolve() {
     const {args, fn} = parseArgs(Array.from(arguments));
@@ -44,20 +49,6 @@ export default class Injector {
     return resolved;
   }
 }
-
-// const i = new Injector({a:1,b:2});
-// i.add('c', 3);
-// i.resolve('a', 'b', 'c', function(x, y, z) {
-//   console.log(arguments)
-// });
-// resolve(['a', 'b', 'c'], function(x, y, z) {
-  
-// });
-// resolve(function(a, b, c) {
-  
-// });
-// resolve('a', 'b', 'c');
-// resolve(['a', 'b', 'c']);
 
 function parseArgs(args) {
   let fn = null;
