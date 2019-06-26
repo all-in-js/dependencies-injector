@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/famanoder/dependencies-injector.svg?branch=master)](https://travis-ci.org/famanoder/dependencies-injector)
+
 > a Javascript & Nodejs dependencies injector
 
 ### Usage
