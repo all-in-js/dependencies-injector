@@ -25,9 +25,10 @@
   },
   "keywords": [
     "js",
-    "nodejs",
+    "node.js",
     "di",
     "inject",
+    "injection",
     "dependencies injector"
   ],
   "jest": {
