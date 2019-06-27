@@ -11,7 +11,8 @@
     "build": "yarn compile -w",
     "prepublish": "yarn compile",
     "test:dev": "jest --watch",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
