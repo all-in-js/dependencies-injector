@@ -1,14 +1,14 @@
 import Injector from './injector';
 
-const inject = new Injector();
+const injector = new Injector();
 
 export function Injectable(target) {
-  inject.add(target.constructor.name, target);
+  injector.add(target.constructor.name, target);
 }
 
 export function Inject() {
-  const resolved = inject.resolve.apply(inject, arguments);
-  return function(target) {
+  const resolved = injector.resolve.apply(injector, arguments);
+  return function(target, name, descriptor) {  
     return extend(target, resolved);
   }
 }
@@ -21,4 +21,4 @@ function extend(clas, resolved) {
   }
 }
 
-export default inject;
+export default injector;

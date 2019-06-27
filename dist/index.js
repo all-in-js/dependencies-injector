@@ -11,15 +11,15 @@ var _injector = _interopRequireDefault(require("./injector"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const inject = new _injector.default();
+const injector = new _injector.default();
 
 function Injectable(target) {
-  inject.add(target.constructor.name, target);
+  injector.add(target.constructor.name, target);
 }
 
 function Inject() {
-  const resolved = inject.resolve.apply(inject, arguments);
-  return function (target) {
+  const resolved = injector.resolve.apply(injector, arguments);
+  return function (target, name, descriptor) {
     return extend(target, resolved);
   };
 }
@@ -33,5 +33,5 @@ function extend(clas, resolved) {
   };
 }
 
-var _default = inject;
+var _default = injector;
 exports.default = _default;
