@@ -56,7 +56,7 @@ describe('test some way to resolve dependency.', () => {
     });
   });
 
-  it('resolve from function arguments.', () => {
+  it('resolve dependencies from function arguments.', () => {
     injector.resolve(function(a, b, c) {
       expect(a).toBe(1);
       expect(b).toBe(2);
