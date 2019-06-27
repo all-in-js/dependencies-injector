@@ -11,17 +11,18 @@
     "build": "yarn compile -w",
     "prepublish": "yarn compile",
     "test:dev": "jest --watch",
-    "test": "jest --coverage"
+    "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-env": "^7.4.5"
+    "@babel/preset-env": "^7.4.5",
+    "coveralls": "^3.0.4",
+    "jest": "^24.8.0"
   },
   "dependencies": {
-    "@eryue/utils": "^1.0.4",
-    "jest": "^24.8.0"
+    "@eryue/utils": "^1.0.4"
   },
   "keywords": [
     "js",
@@ -32,7 +33,9 @@
     "dependencies injector"
   ],
   "jest": {
-    "roots": ["test"],
+    "roots": [
+      "test"
+    ],
     "notify": true
   },
   "babel": {
@@ -47,7 +50,12 @@
       ]
     ],
     "plugins": [
-      ["@babel/plugin-proposal-decorators", { "legacy": true }]
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ]
     ]
   }
 }
