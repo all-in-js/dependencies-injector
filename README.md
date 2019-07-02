@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/famanoder/dependencies-injector.svg?branch=master)](https://travis-ci.org/famanoder/dependencies-injector) [![Coverage Status](https://coveralls.io/repos/github/famanoder/dependencies-injector/badge.svg?branch=master)](https://coveralls.io/github/famanoder/dependencies-injector?branch=master)
+[![npm](https://img.shields.io/npm/v/@eryue/injector.svg?label=version)](https://www.npmjs.com/package/@eryue/injector) [![Build Status](https://travis-ci.org/famanoder/dependencies-injector.svg?branch=master)](https://travis-ci.org/famanoder/dependencies-injector) [![Coverage Status](https://coveralls.io/repos/github/famanoder/dependencies-injector/badge.svg?branch=master)](https://coveralls.io/github/famanoder/dependencies-injector?branch=master)
 
 > a Javascript & Nodejs dependencies injector
 
