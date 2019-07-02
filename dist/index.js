@@ -23,14 +23,15 @@ function Inject() {
   const resolved = injector.resolve.apply(injector, arguments);
   return function (target, name, descriptor) {
     if (name && descriptor) {
-      const oldValue = descriptor.value;
-      const raw = descriptor.initializer;
+      const oldValue = descriptor.value; // const raw = descriptor.initializer;
 
       if ((0, _utils.getArgType)(oldValue).isFunction) {
+        // function prop
         descriptor.value = function (...args) {
           return oldValue.apply(this, [...resolved, ...args]);
         };
       } else {
+        // value prop
         descriptor.initializer = function () {
           return resolved;
         };
@@ -38,6 +39,7 @@ function Inject() {
 
       return descriptor;
     } else {
+      // class
       return extend(target, resolved);
     }
   };

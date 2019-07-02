@@ -12,19 +12,22 @@ export function Inject() {
   return function(target, name, descriptor) {  
     if(name && descriptor) {
       const oldValue = descriptor.value;
-      const raw = descriptor.initializer;
+      // const raw = descriptor.initializer;
 
       if(getArgType(oldValue).isFunction) {
+        // function prop
         descriptor.value = function(...args) {
           return oldValue.apply(this, [...resolved, ...args]);
         }
       }else{
+        // value prop
         descriptor.initializer = function() {
           return resolved;
         };
       }
       return descriptor;
     }else{
+      // class
       return extend(target, resolved);
     }
   }

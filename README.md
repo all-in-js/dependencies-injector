@@ -4,7 +4,7 @@
 
 ### Usage
 
-* Injector class
+* **Injector class**
 
 ```js
 import Injector from '@eryue/injector';
@@ -25,13 +25,19 @@ const [testService] = inject.resolve('TestService');
 // if argument just is a function, it's arguments would be parsed to be an array to be resolved.
 ```
 
-* Decorator
+* **Decorator**
 
 ```js
-import {Injectable, Inject} from '@eryue/injector';
+import {Injectable} from '@eryue/injector';
 
 @Injectable
 class TestService {}
+```
+
+* inject to constructor
+
+```js
+import {Inject} from '@eryue/injector';
 
 @Inject('TestService')
 class TestControler {
@@ -39,4 +45,45 @@ class TestControler {
     this.testService = testService;
   }
 }
+```
+
+* inject to class's function prop
+
+```js
+import {Inject} from '@eryue/injector';
+
+class TestControler {
+  @Inject('TestService')
+  test(testService) {
+    // ...
+  }
+}
+```
+
+* inject to class's value prop
+
+```js
+import {Inject} from '@eryue/injector';
+
+class TestControler {
+  @Inject('TestService') testService;
+  toString() {
+    // this.testService
+  }
+}
+```
+
+* when inject to class's function prop, merge injected value and your arguments.
+
+```js
+import {Inject} from '@eryue/injector';
+
+class TestControler {
+  @Inject('TestService')
+  test(testService, yourArguments) {
+    // ...
+  }
+}
+
+new TestControler().test('yourArguments');
 ```
