@@ -258,7 +258,7 @@
 
 "@babel/plugin-proposal-class-properties@^7.4.4":
   version "7.4.4"
-  resolved "http://registry.m.jd.com/@babel/plugin-proposal-class-properties/download/@babel/plugin-proposal-class-properties-7.4.4.tgz#93a6486eed86d53452ab9bab35e368e9461198ce"
+  resolved "https://registry.npm.taobao.org/@babel/plugin-proposal-class-properties/download/@babel/plugin-proposal-class-properties-7.4.4.tgz#93a6486eed86d53452ab9bab35e368e9461198ce"
   integrity sha1-k6ZIbu2G1TRSq5urNeNo6UYRmM4=
   dependencies:
     "@babel/helper-create-class-features-plugin" "^7.4.4"
