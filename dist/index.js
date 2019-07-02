@@ -7,6 +7,8 @@ exports.Injectable = Injectable;
 exports.Inject = Inject;
 exports.default = void 0;
 
+var _utils = require("@eryue/utils");
+
 var _injector = _interopRequireDefault(require("./injector"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -14,13 +16,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 const injector = new _injector.default();
 
 function Injectable(target) {
-  injector.add(target.constructor.name, target);
+  injector.add(target.name, target);
 }
 
 function Inject() {
   const resolved = injector.resolve.apply(injector, arguments);
   return function (target, name, descriptor) {
-    return extend(target, resolved);
+    if (name && descriptor) {
+      const oldValue = descriptor.value;
+      const raw = descriptor.initializer;
+
+      if ((0, _utils.getArgType)(oldValue).isFunction) {
+        descriptor.value = function (...args) {
+          return oldValue.apply(this, [...resolved, ...args]);
+        };
+      } else {
+        descriptor.initializer = function () {
+          return resolved;
+        };
+      }
+
+      return descriptor;
+    } else {
+      return extend(target, resolved);
+    }
   };
 }
 

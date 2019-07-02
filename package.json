@@ -10,12 +10,13 @@
     "compile": "babel src --out-dir dist --delete-dir-on-start",
     "build": "yarn compile -w",
     "prepublish": "yarn compile",
-    "test:dev": "jest --watch",
+    "test:dev": "jest --coverage",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5"
   },
@@ -34,7 +35,7 @@
   ],
   "jest": {
     "roots": [
-      "test"
+      "dist/__test__"
     ],
     "notify": true
   },
@@ -52,9 +53,11 @@
     "plugins": [
       [
         "@babel/plugin-proposal-decorators",
-        {
-          "legacy": true
-        }
+        { "legacy": true }
+      ],
+      [
+        "@babel/plugin-proposal-class-properties", 
+        { "loose" : true }
       ]
     ]
   }
