@@ -41,4 +41,6 @@ function extend(clas, resolved) {
   }
 }
 
+export const InjectorClass = Injector;
+
 export default injector;

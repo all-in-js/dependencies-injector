@@ -7,21 +7,21 @@
 * **Injector class**
 
 ```js
-import Injector from '@eryue/injector';
+import {InjectorClass} from '@eryue/injector';
 
 const initDeps = {
   key: function key() {}
 };
-const inject = new Injector(initDeps);
+const injector = new InjectorClass(initDeps);
 
-inject.add(class TestService{});
+injector.add(class TestService{});
 
-inject.resolve(['TestService', 'key'], function(testService, key) {});
+injector.resolve(['TestService', 'key'], function(testService, key) {});
 // or
-const [testService] = inject.resolve('TestService');
+const [testService] = injector.resolve('TestService');
 
-// this `inject.resolve` support various types, eg:
-// `inject.resolve(string[array<string>[function]])` 
+// this `injector.resolve` support various types, eg:
+// `injector.resolve(string[array<string>[function]])` 
 // if argument just is a function, it's arguments would be parsed to be an array to be resolved.
 ```
 

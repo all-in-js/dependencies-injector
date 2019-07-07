@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Injectable = Injectable;
 exports.Inject = Inject;
-exports.default = void 0;
+exports.default = exports.InjectorClass = void 0;
 
 var _utils = require("@eryue/utils");
 
@@ -54,5 +54,7 @@ function extend(clas, resolved) {
   };
 }
 
+const InjectorClass = _injector.default;
+exports.InjectorClass = InjectorClass;
 var _default = injector;
 exports.default = _default;
