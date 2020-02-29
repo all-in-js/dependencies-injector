@@ -1,4 +1,5 @@
-import {getArgsFromFunc, getArgType, objToMap, assert, _} from '@eryue/utils';
+import { getArgsFromFunc, getArgType, objToMap, log } from '@iuv-tools/utils';
+import flatten from 'lodash.flatten';
 
 // 保护私有栈，防止通过实例调用直接篡改
 const dependenciesMap = new Map();
@@ -8,11 +9,11 @@ export default class Injector {
     let depsMap;
     const argType = getArgType(initDeps);
 
-    if(argType.isObject) {
+    if (argType.isObject) {
       depsMap = objToMap(initDeps);
-    }else if(argType.isMap){
+    } else if (argType.isMap) {
       depsMap = initDeps;
-    }else{
+    } else {
       depsMap = new Map();
     }
     dependenciesMap.set(this, depsMap);
@@ -21,29 +22,32 @@ export default class Injector {
   add(name, value) {
     const nameType = getArgType(name);
 
-    if(!value && name) {
-      if(nameType.isString) {
+    if (!value && name) {
+      if (nameType.isString) {
         value = name;
-      }else if(nameType.isFunction) {
+      } else if (nameType.isFunction) {
         value = name;
         name = value.name;
-      }else{
+      } else {
         value = name;
         name = value.toString();
       }
     }
     
-    assert.ok(name, `'name' argument or property must provided.`);
+    if (!name) {
+      log.error(`'name' argument or property must be provided.`, '@eryue/injector');
+      process.exit(1);
+    }
     
     // older will be replaced
     dependenciesMap.get(this).set(name, value);
   }
   resolve() {
-    const {args, fn} = parseArgs(Array.from(arguments));
+    const { args, fn } = parseArgs(Array.from(arguments));
 
     const resolved = args.map(name => dependenciesMap.get(this).get(name));
     
-    if(fn) {
+    if (fn) {
       fn.apply(this, resolved);
     }
     return resolved;
@@ -52,18 +56,18 @@ export default class Injector {
 
 function parseArgs(args) {
   let fn = null;
-  if(args.length) {
+  if (args.length) {
     fn = args.pop();
-    if(!getArgType(fn).isFunction) {
+    if (!getArgType(fn).isFunction) {
       args.push(fn);
       fn = null;
-    }else{
-      if(!args.length) {
+    } else {
+      if (!args.length) {
         // just a callback
         args = getArgsFromFunc(fn);
       }
     }
-    args = _.flatten(args);
+    args = flatten(args);
   }
 
   return {args, fn};

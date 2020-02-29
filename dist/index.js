@@ -7,7 +7,7 @@ exports.Injectable = Injectable;
 exports.Inject = Inject;
 exports.default = exports.InjectorClass = void 0;
 
-var _utils = require("@eryue/utils");
+var _utils = require("@iuv-tools/utils");
 
 var _injector = _interopRequireDefault(require("./injector"));
 

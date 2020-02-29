@@ -1,4 +1,4 @@
-import {getArgType} from '@eryue/utils';
+import { getArgType } from '@iuv-tools/utils';
 import Injector from './injector';
 
 const injector = new Injector();
@@ -10,23 +10,23 @@ export function Injectable(target) {
 export function Inject() {
   const resolved = injector.resolve.apply(injector, arguments);
   return function(target, name, descriptor) {  
-    if(name && descriptor) {
+    if (name && descriptor) {
       const oldValue = descriptor.value;
       // const raw = descriptor.initializer;
 
-      if(getArgType(oldValue).isFunction) {
+      if (getArgType(oldValue).isFunction) {
         // function prop
         descriptor.value = function(...args) {
           return oldValue.apply(this, [...resolved, ...args]);
         }
-      }else{
+      } else {
         // value prop
         descriptor.initializer = function() {
           return resolved;
         };
       }
       return descriptor;
-    }else{
+    } else {
       // class
       return extend(target, resolved);
     }

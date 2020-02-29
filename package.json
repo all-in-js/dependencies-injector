@@ -8,23 +8,27 @@
   "license": "MIT",
   "scripts": {
     "compile": "babel src --out-dir dist --delete-dir-on-start",
-    "build": "yarn compile -w",
-    "prepublish": "yarn compile",
-    "pushnpm": "npm publish --registry https://registry.npmjs.org/",
+    "dev": "yarn compile -w",
+    "prepublishOnly": "yarn compile && yarn test",
     "test:dev": "jest --coverage",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
-    "@babel/preset-env": "^7.4.5"
+    "@babel/preset-env": "^7.4.5",
+    "coveralls": "^3.0.9",
+    "jest": "^25.1.0"
   },
   "dependencies": {
-    "@eryue/utils": "^1.0.4",
-    "coveralls": "^3.0.4",
-    "jest": "^24.8.0"
+    "@iuv-tools/utils": "^1.0.0-beta.2",
+    "lodash.flatten": "^4.4.0"
   },
   "keywords": [
     "js",

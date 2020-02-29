@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _utils = require("@eryue/utils");
+var _utils = require("@iuv-tools/utils");
+
+var _lodash = _interopRequireDefault(require("lodash.flatten"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 保护私有栈，防止通过实例调用直接篡改
 const dependenciesMap = new Map();
@@ -41,7 +45,11 @@ class Injector {
       }
     }
 
-    _utils.assert.ok(name, `'name' argument or property must provided.`); // older will be replaced
+    if (!name) {
+      _utils.log.error(`'name' argument or property must be provided.`, '@eryue/injector');
+
+      process.exit(1);
+    } // older will be replaced
 
 
     dependenciesMap.get(this).set(name, value);
@@ -81,7 +89,7 @@ function parseArgs(args) {
       }
     }
 
-    args = _utils._.flatten(args);
+    args = (0, _lodash.default)(args);
   }
 
   return {
