@@ -1,6 +1,6 @@
 {
   "name": "@eryue/injector",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "a Javascript & Nodejs dependencies injector",
   "main": "dist",
   "repository": "https://github.com/famanoder/dependencies-injector.git",
