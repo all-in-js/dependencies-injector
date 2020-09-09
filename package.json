@@ -6,8 +6,9 @@
   "repository": "https://github.com/famanoder/dependencies-injector.git",
   "author": "famanoder",
   "license": "MIT",
+  "typings": "./index.d.ts",
   "scripts": {
-    "compile": "babel src --out-dir dist --delete-dir-on-start",
+    "compile": "babel src/__test__ --out-dir dist/__test__ --delete-dir-on-start",
     "dev": "yarn compile -w",
     "prepublishOnly": "yarn compile && yarn test",
     "test:dev": "jest --coverage",
@@ -23,8 +24,10 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
+    "@types/lodash.flatten": "^4.4.6",
     "coveralls": "^3.0.9",
-    "jest": "^25.1.0"
+    "jest": "^25.1.0",
+    "typescript": "^4.0.2"
   },
   "dependencies": {
     "@iuv-tools/utils": "^1.0.0-beta.2",

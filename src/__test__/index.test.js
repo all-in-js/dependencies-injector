@@ -30,7 +30,7 @@ describe(`a class's props can be injected.`, () => {
     }
 
     const fromInject = new TestInjectFunc().test();
-    expect(fromInject).toEqual(Test);
+    expect(fromInject[0]).toEqual(Test);
   });
 
   it(`should class's prop value can be injected.`, () => {
@@ -50,7 +50,7 @@ describe(`a class's props can be injected.`, () => {
     }
 
     const fromInject = new TestInjectFunc().test('myArgs');
-    expect(fromInject[0]).toEqual(Test);
+    expect(fromInject[0][0]).toEqual(Test);
     expect(fromInject[1][0]).toBe('myArgs');
   });
 });
