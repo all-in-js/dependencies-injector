@@ -17,13 +17,18 @@ function Inject(...agrs) {
             const oldValue = descriptor.value;
             // const raw = descriptor.initializer;
             if (utils_1.getArgType(oldValue).isFunction) {
-                // function prop
-                descriptor.value = function (...s) {
-                    return oldValue.apply(this, [resolved, ...s]);
+                /**
+                 * 装饰类的方法
+                 * 将依赖注入第一个参数
+                 */
+                descriptor.value = function (...args) {
+                    return oldValue.apply(this, [resolved, ...args]);
                 };
             }
             else {
-                // value prop
+                /**
+                 * 装饰类的属性
+                 */
                 descriptor.initializer = function () {
                     return resolved;
                 };
@@ -31,7 +36,7 @@ function Inject(...agrs) {
             return descriptor;
         }
         else {
-            // class
+            // 装饰类
             return extend(target, resolved);
         }
     };
@@ -40,7 +45,7 @@ exports.Inject = Inject;
 function extend(clas, resolved) {
     return class extends clas {
         constructor(...args) {
-            super(...[...resolved, ...args]);
+            super(...[resolved, ...args]);
         }
     };
 }

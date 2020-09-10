@@ -18,7 +18,7 @@ describe(`a class's props can be injected.`, () => {
     }
 
     const fromConstructor = new TestInjectConstructor().test;
-    expect(fromConstructor).toEqual(Test);
+    expect(fromConstructor[0]).toEqual(Test);
   });
 
   it(`should class's function prop can be injected.`, () => {

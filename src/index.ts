@@ -7,7 +7,7 @@ interface TypedDescriptor extends TypedPropertyDescriptor<any> {
 
 const injector: Iinjector = new Injector();
 
-export function Injectable(target: any) {
+export function Injectable(target: FunctionConstructor) {
   injector.add(target.name, target);
 }
 
@@ -19,19 +19,24 @@ export function Inject(...agrs: Array<ArgsItemType>) {
       // const raw = descriptor.initializer;
 
       if (getArgType(oldValue).isFunction) {
-        // function prop
+        /**
+         * 装饰类的方法
+         * 将依赖注入第一个参数
+         */
         descriptor.value = function(...args: Array<any>) {
           return oldValue.apply(this, [resolved, ...args]);
         }
       } else {
-        // value prop
+        /**
+         * 装饰类的属性
+         */
         descriptor.initializer = function() {
           return resolved;
         };
       }
       return descriptor;
     } else {
-      // class
+      // 装饰类
       return extend(target, resolved);
     }
   }
@@ -40,7 +45,7 @@ export function Inject(...agrs: Array<ArgsItemType>) {
 function extend(clas: FunctionConstructor, resolved: Array<any>) {
   return class extends clas {
     constructor(...args: Array<any>) {
-      super(...[...resolved, ...args]);
+      super(...[resolved, ...args]);
     }
   }
 }
