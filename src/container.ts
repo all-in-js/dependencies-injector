@@ -4,7 +4,7 @@ import flatten from 'lodash.flatten';
 type MapType = Map<any, any>;
 type DepsType = object | MapType | undefined;
 export type ArgsItemType = string | Function;
-export interface Iinjector {
+export interface IContainer {
   add: (name: string, value: any) => void;
   resolve: (...agrs: Array<ArgsItemType>) => Array<any>;
 }
@@ -14,9 +14,9 @@ export interface Iinjector {
  * 所有实例的依赖收集池，每一个实例一个独立的依赖收集Map
  * 目前比较流行的是metadata的做法，意义一样，做法的差别
  */
-const dependenciesMap: Map<Iinjector, MapType> = new Map();
+const dependenciesMap: Map<IContainer, MapType> = new Map();
 
-export default class Injector implements Iinjector {
+export default class Container implements IContainer {
   constructor(initDeps?: DepsType) {
     let depsMap: MapType;
     const argType = getArgType(initDeps);

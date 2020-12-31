@@ -10,31 +10,31 @@
   
 ### Usage
 
-* **Injector class**
+* **Container class**
 
 ```js
-import {InjectorClass} from '@eryue/injector';
+import { ContainerClass } from '@eryue/injector';
 
 const initDeps = {
   key: function key() {}
 };
-const injector = new InjectorClass(initDeps);
+const container = new ContainerClass(initDeps);
 
-injector.add(class TestService{});
+container.add(class TestService{});
 
-injector.resolve(['TestService', 'key'], function(testService, key) {});
+container.resolve(['TestService', 'key'], function(testService, key) {});
 // or
-const [testService] = injector.resolve('TestService');
+const [testService] = container.resolve('TestService');
 
-// this `injector.resolve` support various types, eg:
-// `injector.resolve(string[array<string>[function]])` 
+// this `container.resolve` support various types, eg:
+// `container.resolve(string[array<string>[function]])` 
 // if argument just is a function, it's arguments would be parsed to be an array to be resolved.
 ```
 
 * **Decorator**
 
 ```js
-import {Injectable} from '@eryue/injector';
+import { Injectable } from '@eryue/injector';
 
 @Injectable
 class TestService {}
@@ -43,7 +43,7 @@ class TestService {}
 * inject to constructor
 
 ```js
-import {Inject} from '@eryue/injector';
+import { Inject } from '@eryue/injector';
 
 @Inject('TestService')
 class TestControler {
@@ -56,7 +56,7 @@ class TestControler {
 * inject to class's function prop
 
 ```js
-import {Inject} from '@eryue/injector';
+import { Inject } from '@eryue/injector';
 
 class TestControler {
   @Inject('TestService')
@@ -69,7 +69,7 @@ class TestControler {
 * inject to class's value prop
 
 ```js
-import {Inject} from '@eryue/injector';
+import { Inject } from '@eryue/injector';
 
 class TestControler {
   @Inject('TestService') testService;
@@ -82,7 +82,7 @@ class TestControler {
 * when inject to class's function prop, merge injected value and your arguments.
 
 ```js
-import {Inject} from '@eryue/injector';
+import { Inject } from '@eryue/injector';
 
 class TestControler {
   @Inject('TestService')

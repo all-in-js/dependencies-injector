@@ -1,18 +1,18 @@
 import { getArgType } from '@iuv-tools/utils';
-import Injector, { Iinjector, ArgsItemType } from './injector';
+import Container, { IContainer, ArgsItemType } from './container';
 
 interface TypedDescriptor extends TypedPropertyDescriptor<any> {
   initializer: Function;
 }
 
-const injector: Iinjector = new Injector();
+const container: IContainer = new Container();
 
 export function Injectable(target: FunctionConstructor) {
-  injector.add(target.name, target);
+  container.add(target.name, target);
 }
 
 export function Inject(...agrs: Array<ArgsItemType>) {
-  const resolved = injector.resolve.apply(injector, agrs);
+  const resolved = container.resolve.apply(container, agrs);
   return function(target: FunctionConstructor, name: string | symbol, descriptor: TypedDescriptor) {  
     if (name && descriptor) {
       const oldValue = descriptor.value;
@@ -50,6 +50,6 @@ function extend(clas: FunctionConstructor, resolved: Array<any>) {
   }
 }
 
-export const InjectorClass = Injector;
+export const ContainerClass = Container;
 
-export default injector;
+export default container;
