@@ -13,7 +13,7 @@
 * **Container class**
 
 ```js
-import { ContainerClass } from '@eryue/injector';
+import { ContainerClass } from '@all-in-js/injector';
 
 const initDeps = {
   key: function key() {}
@@ -34,7 +34,7 @@ const [testService] = container.resolve('TestService');
 * **Decorator**
 
 ```js
-import { Injectable } from '@eryue/injector';
+import { Injectable } from '@all-in-js/injector';
 
 @Injectable
 class TestService {}
@@ -43,7 +43,7 @@ class TestService {}
 * inject to constructor
 
 ```js
-import { Inject } from '@eryue/injector';
+import { Inject } from '@all-in-js/injector';
 
 @Inject('TestService')
 class TestControler {
@@ -56,7 +56,7 @@ class TestControler {
 * inject to class's function prop
 
 ```js
-import { Inject } from '@eryue/injector';
+import { Inject } from '@all-in-js/injector';
 
 class TestControler {
   @Inject('TestService')
@@ -69,7 +69,7 @@ class TestControler {
 * inject to class's value prop
 
 ```js
-import { Inject } from '@eryue/injector';
+import { Inject } from '@all-in-js/injector';
 
 class TestControler {
   @Inject('TestService') testService;
@@ -82,7 +82,7 @@ class TestControler {
 * when inject to class's function prop, merge injected value and your arguments.
 
 ```js
-import { Inject } from '@eryue/injector';
+import { Inject } from '@all-in-js/injector';
 
 class TestControler {
   @Inject('TestService')

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("@iuv-tools/utils");
+const utils_1 = require("@all-in-js/utils");
 const lodash_flatten_1 = __importDefault(require("lodash.flatten"));
 /**
  * 保护私有栈，防止通过实例调用直接篡改
@@ -11,7 +11,7 @@ const lodash_flatten_1 = __importDefault(require("lodash.flatten"));
  * 目前比较流行的是metadata的做法，意义一样，做法的差别
  */
 const dependenciesMap = new Map();
-class Injector {
+class Container {
     constructor(initDeps) {
         let depsMap;
         const argType = utils_1.getArgType(initDeps);
@@ -61,8 +61,8 @@ class Injector {
     /**
      * 根据key解析依赖
      */
-    resolve() {
-        const { args, fn } = parseArgs(Array.from(arguments));
+    resolve(...params) {
+        const { args, fn } = parseArgs(params);
         const resolved = args.map((name) => {
             const thisMap = dependenciesMap.get(this);
             return thisMap.get(name);
@@ -73,7 +73,7 @@ class Injector {
         return resolved;
     }
 }
-exports.default = Injector;
+exports.default = Container;
 /**
  * 解析参数
  * eg: const [a, b, c] = resolve('a', 'b', 'c');

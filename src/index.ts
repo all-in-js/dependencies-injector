@@ -1,4 +1,4 @@
-import { getArgType } from '@iuv-tools/utils';
+import { getArgType } from '@all-in-js/utils';
 import Container, { IContainer, ArgsItemType } from './container';
 
 interface TypedDescriptor extends TypedPropertyDescriptor<any> {

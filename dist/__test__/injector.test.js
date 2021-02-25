@@ -1,21 +1,29 @@
 "use strict";
 
-var _injector = _interopRequireDefault(require("../injector"));
+var _ = _interopRequireDefault(require(".."));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/*
+ * @Author: your name
+ * @Date: 2021-02-24 16:13:38
+ * @LastEditTime: 2021-02-24 19:14:10
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \workspaced:\opensources\all-in-js\dependencies-injector\src\__test__\injector.test.js
+ */
 test('support initial dependencies[Map or Object].', () => {
   const initDeps = {
     testObj: function () {
       return true;
     }
   };
-  const injector = new _injector.default(initDeps);
+  const injector = new _.default(initDeps);
   const [v] = injector.resolve('testObj');
   expect(v()).toBe(true);
 });
 describe('add one dependency.', () => {
-  const injector = new _injector.default();
+  const injector = new _.default();
   it('add with name.', () => {
     const testObj = {
       v: 1
@@ -33,7 +41,7 @@ describe('add one dependency.', () => {
   });
 });
 describe('test some way to resolve dependency.', () => {
-  const injector = new _injector.default({
+  const injector = new _.default({
     a: 1,
     b: 2,
     c: 3

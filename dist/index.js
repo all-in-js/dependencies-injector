@@ -3,15 +3,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("@iuv-tools/utils");
-const injector_1 = __importDefault(require("./injector"));
-const injector = new injector_1.default();
+exports.ContainerClass = exports.Inject = exports.Injectable = void 0;
+const utils_1 = require("@all-in-js/utils");
+const container_1 = __importDefault(require("./container"));
+const container = new container_1.default();
 function Injectable(target) {
-    injector.add(target.name, target);
+    container.add(target.name, target);
 }
 exports.Injectable = Injectable;
 function Inject(...agrs) {
-    const resolved = injector.resolve.apply(injector, agrs);
+    const resolved = container.resolve.apply(container, agrs);
     return function (target, name, descriptor) {
         if (name && descriptor) {
             const oldValue = descriptor.value;
@@ -49,5 +50,5 @@ function extend(clas, resolved) {
         }
     };
 }
-exports.InjectorClass = injector_1.default;
-exports.default = injector;
+exports.ContainerClass = container_1.default;
+exports.default = container;

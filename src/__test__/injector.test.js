@@ -1,4 +1,12 @@
-import Injector from '../injector';
+/*
+ * @Author: your name
+ * @Date: 2021-02-24 16:13:38
+ * @LastEditTime: 2021-02-24 19:14:10
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: \workspaced:\opensources\all-in-js\dependencies-injector\src\__test__\injector.test.js
+ */
+import Injector from '..';
 
 test('support initial dependencies[Map or Object].', () => {
   const initDeps = {

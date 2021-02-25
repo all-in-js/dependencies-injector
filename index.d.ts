@@ -1,1 +1,1 @@
-declare module '@iuv-tools/utils';
+declare module '@all-in-js/utils';

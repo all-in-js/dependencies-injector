@@ -1,22 +1,24 @@
 {
-  "name": "@eryue/injector",
-  "version": "1.1.1",
+  "name": "@all-in-js/injector",
+  "version": "1.0.3",
   "description": "a Javascript & Nodejs dependencies injector",
   "main": "dist",
-  "repository": "https://github.com/famanoder/dependencies-injector.git",
   "author": "famanoder",
   "license": "MIT",
-  "typings": "./index.d.ts",
   "scripts": {
-    "compile": "babel src/__test__ --out-dir dist/__test__ --delete-dir-on-start",
+    "compile": "tsc && babel src/__test__ --out-dir dist/__test__ --delete-dir-on-start",
     "dev": "yarn compile -w",
-    "prepublishOnly": "yarn compile && yarn test",
+    "prepublishOnly": "yarn compile",
     "test:dev": "jest --coverage",
     "test": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/all-in-js/dependencies-injector"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.4",
@@ -30,7 +32,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "@iuv-tools/utils": "^1.0.0-beta.2",
+    "@all-in-js/utils": "^1.0.0",
     "lodash.flatten": "^4.4.0"
   },
   "keywords": [

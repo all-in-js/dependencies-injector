@@ -1,4 +1,4 @@
-import { getArgsFromFunc, getArgType, objToMap, log } from '@iuv-tools/utils';
+import { getArgsFromFunc, getArgType, objToMap, log } from '@all-in-js/utils';
 import flatten from 'lodash.flatten';
 
 type MapType = Map<any, any>;
@@ -66,8 +66,8 @@ export default class Container implements IContainer {
   /**
    * 根据key解析依赖
    */
-  resolve() {
-    const { args, fn } = parseArgs(Array.from(arguments));
+  resolve(...params: any[]) {
+    const { args, fn } = parseArgs(params);
     const resolved: Array<any> = args.map((name: ArgsItemType) => {
       const thisMap = <MapType>dependenciesMap.get(this);
       return thisMap.get(name);
